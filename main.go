@@ -38,7 +38,7 @@ func main() {
 	lb := balancer.NewLoadBalancer([]string{*backend1, *backend2, *backend3}, logger)
 
 	// Start health check in a goroutine
-	go lb.HealthCheck(60 * time.Second)
+	go lb.HealthCheck(10 * time.Second)
 
 	// Setup server
 	server := &http.Server{

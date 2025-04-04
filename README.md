@@ -27,6 +27,12 @@ go build -o backend ./backend-servers/main.go
 ./backend -port 8082 -id 2 -log backend2.log & 
 ./backend -port 8083 -id 3 -log backend3.log &
 
+## Or directly
+
+go run backend-servers/main.go -port 8081 -id 1
+go run backend-servers/main.go -port 8082 -id 2
+go run backend-servers/main.go -port 8083 -id 3
+
 # Start the load balancer
 ./loadbalancer -port 8080 \
   -backend1 http://localhost:8081 \
@@ -34,7 +40,11 @@ go build -o backend ./backend-servers/main.go
   -backend3 http://localhost:8083 \
   -log loadbalancer.log
 
-### Testing
+## Or directly
+
+go run main.go
+
+# Testing
 
 The load balancer includes a comprehensive test suite that verifies the JWT-based routing logic and round-robin distribution.
 
@@ -55,7 +65,7 @@ The test will:
 3. Verify correct distribution according to JWT-based routing rules
 4. Output distribution statistics and log details
 
-### Sample Log Output
+## Sample Log Output
 
 Admin requests to Backend 1: 40
 User requests: Backend 1=27, Backend 2=26, Backend 3=27
