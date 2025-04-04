@@ -23,14 +23,14 @@ go build -o backend ./backend-servers/main.go
 
 # Start the backend servers
 
-./backend -port 8081 -id 1 -log backend1.log & 
-./backend -port 8082 -id 2 -log backend2.log & 
+./backend -port 8081 -id 1 -log backend1.log & \
+./backend -port 8082 -id 2 -log backend2.log & \
 ./backend -port 8083 -id 3 -log backend3.log &
 
 ## Or directly
 
-go run backend-servers/main.go -port 8081 -id 1
-go run backend-servers/main.go -port 8082 -id 2
+go run backend-servers/main.go -port 8081 -id 1 \
+go run backend-servers/main.go -port 8082 -id 2 \
 go run backend-servers/main.go -port 8083 -id 3
 
 # Start the load balancer
