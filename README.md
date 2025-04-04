@@ -67,8 +67,8 @@ The test will:
 
 ## Sample Log Output
 
-Admin requests to Backend 1: 40
-User requests: Backend 1=27, Backend 2=26, Backend 3=27
+Admin requests to Backend 1: 40 \
+User requests: Backend 1=27, Backend 2=26, Backend 3=27 \
 Client requests: Backend 1=28, Backend 2=26, Backend 3=26
 
 ## Monitoring
