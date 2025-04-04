@@ -11,30 +11,6 @@ This project implements a custom HTTP load balancer in Go that distributes incom
 - Detailed request logging
 - Fallback handling when backends are down
 
-### Architecture
-
-┌─────────────┐
-│             │
-│   Clients   │
-│             │
-└──────┬──────┘
-       │
-       ▼
-┌──────────────┐    JWT Validation
-│              │    Role Extraction
-│ Load Balancer├────────┐
-│              │        │
-└──┬─────┬─────┘        │
-   │     │              │
-   │     │              │
-   ▼     ▼              ▼
-┌──────┐┌──────┐  ┌────────┐
-│Back 1││Back 2│  │ Back 3 │
-│Admin ││      │  │        │
-│User  ││User  │  │ User   │
-│Client││Client│  │ Client │
-└──────┘└──────┘  └────────┘
-
 ### Building the Application
 
 # Build the load balancer
@@ -46,8 +22,9 @@ go build -o backend ./backend-servers/main.go
 ### Running the Load Balancer
 
 # Start the backend servers
-./backend -port 8081 -id 1 -log backend1.log &
-./backend -port 8082 -id 2 -log backend2.log &
+
+./backend -port 8081 -id 1 -log backend1.log & 
+./backend -port 8082 -id 2 -log backend2.log & 
 ./backend -port 8083 -id 3 -log backend3.log &
 
 # Start the load balancer
@@ -63,10 +40,12 @@ The load balancer includes a comprehensive test suite that verifies the JWT-base
 
 ## Running the Tests
 
-# Use the provided script to run tests with log capture
+### Use the provided script to run tests with log capture
+
+chmod +x run_test.sh
 ./run_test.sh
 
-# Or run tests directly
+### Or run tests directly
 go test -v ./test/
 
 The test will:
@@ -76,7 +55,7 @@ The test will:
 3. Verify correct distribution according to JWT-based routing rules
 4. Output distribution statistics and log details
 
-# Sample Log Output
+### Sample Log Output
 
 Admin requests to Backend 1: 40
 User requests: Backend 1=27, Backend 2=26, Backend 3=27
@@ -91,11 +70,6 @@ Each component logs detailed information about requests and responses:
 
 
 These logs are written to separate files for easy monitoring and debugging.
-
-## Run tests
-
-chmod +x run_test.sh
-./run_test.sh 
 
 ### Prerequisites
 
